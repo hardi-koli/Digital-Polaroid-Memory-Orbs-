@@ -9,13 +9,15 @@
 //   cardColor   -> front-of-card background color (also the orb's base color)
 //   backColor   -> back-of-card background color (also the orb's glow color)
 //   textColor   -> text color used on that card
+//   orbLabel    -> (optional) short text shown on the tag under the orb.
+//                  If omitted, falls back to `caption`, then to 'Memory'.
 //
 // Add more objects to add more orbs (they auto-wrap into new shelf rows).
 // ============================================================
 const memories = [
     {
         type: 'photo-with-caption',
-        imageUrl: 'Images/1st Trip.jpg',
+        imageUrl: 'https://images.unsplash.com/photo-1529156069898-49953eb1b5a4?auto=format&fit=crop&w=400&q=80',
         caption: 'Our first trip!',
         backMessage: 'I still cannot believe we managed to pull this trip off. Here is to a hundred more adventures together.',
         cardColor: '#ffffff', // Classic white front
@@ -26,6 +28,7 @@ const memories = [
         type: 'photo-only',
         imageUrl: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=400&q=80',
         caption: '',
+        orbLabel: 'That Perfect Day',
         backMessage: 'Sometimes no words are needed to explain a perfect day.',
         cardColor: '#e0f7fa', // Light cyan front
         backColor: '#b2ebf2', // Slightly darker cyan back
@@ -35,14 +38,14 @@ const memories = [
         type: 'text-only',
         imageUrl: '',
         caption: 'The 3 AM Pizza Argument',
-        backMessage: 'Arguing over pineapple on pizza instead of studying. You still owe me a slice! - Neha',
+        backMessage: 'Arguing over pineapple on pizza instead of studying. You still owe me a slice! - Hardi',
         cardColor: '#fff9c4', // Yellow sticky note front
         backColor: '#ffecb3', // Deeper yellow back
         textColor: '#d84315'  // Dark orange text for contrast
     },
     {
         type: 'photo-with-caption',
-        imageUrl: 'Images/late-night-coding.jpg',
+        imageUrl: 'https://images.unsplash.com/photo-1521459467264-068dbe39f88d?auto=format&fit=crop&w=400&q=80',
         caption: 'Late night coding',
         backMessage: 'Thanks for always keeping me sane during those ridiculous late-night coding sessions.',
         cardColor: '#e8f5e9', // Mint green front
@@ -82,17 +85,31 @@ for (let rowStart = 0; rowStart < memories.length; rowStart += ORBS_PER_ROW) {
     rowMemories.forEach((memory, i) => {
         const globalIndex = rowStart + i;
 
+        // ✏️ EDIT ME (optional): what shows on the little tag under each orb.
+        // Uses `orbLabel` if you set it on a memory, otherwise falls back
+        // to the caption, otherwise shows a generic 'Memory' label.
+        const labelText = memory.orbLabel || memory.caption || 'Memory';
+
+        const orbItem = document.createElement('div');
+        orbItem.className = 'orb-item';
+
         const ball = document.createElement('button');
         ball.type = 'button';
         ball.className = 'memory-ball';
         ball.style.setProperty('--ball-base', memory.cardColor || '#ffffff');
         ball.style.setProperty('--ball-glow', memory.backColor || '#ffe5ec');
         ball.style.animationDelay = `${(globalIndex % 5) * 0.4}s`;
-        ball.setAttribute('aria-label', memory.caption ? `Open memory: ${memory.caption}` : 'Open memory');
+        ball.setAttribute('aria-label', `Open memory: ${labelText}`);
 
         ball.addEventListener('click', () => openMemory(memory, ball, globalIndex));
 
-        ballsWrap.appendChild(ball);
+        const label = document.createElement('span');
+        label.className = 'ball-label';
+        label.textContent = labelText;
+
+        orbItem.appendChild(ball);
+        orbItem.appendChild(label);
+        ballsWrap.appendChild(orbItem);
     });
 
     const plankGroup = document.createElement('div');
