@@ -15,7 +15,7 @@
 const memories = [
     {
         type: 'photo-with-caption',
-        imageUrl: 'Img/1st Trip.jpg',
+        imageUrl: 'Images/1st Trip.jpg',
         caption: 'Our first trip!',
         backMessage: 'I still cannot believe we managed to pull this trip off. Here is to a hundred more adventures together.',
         cardColor: '#ffffff', // Classic white front
@@ -42,7 +42,7 @@ const memories = [
     },
     {
         type: 'photo-with-caption',
-        imageUrl: 'Img/late-night-coding.jpg',
+        imageUrl: 'Images/late-night-coding.jpg',
         caption: 'Late night coding',
         backMessage: 'Thanks for always keeping me sane during those ridiculous late-night coding sessions.',
         cardColor: '#e8f5e9', // Mint green front
