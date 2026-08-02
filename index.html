@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Memory Shelf</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ✏️ EDIT ME: change the title/subtitle for a different occasion -->
+    <header>
+        <h1>Happy Friendship Day!</h1>
+        <p>Tap a memory orb to bring it front and center...</p>
+    </header>
+
+    <!-- The shelf that holds all our glowing memory orbs -->
+    <main id="shelf" class="shelf-room"></main>
+
+    <!-- Overlay shown when a memory orb is opened -->
+    <div id="memory-overlay" class="memory-overlay">
+        <button id="close-overlay" class="close-btn" aria-label="Back to shelf">&times;</button>
+        <div id="travel-orb" class="travel-orb"></div>
+        <div id="focused-card" class="polaroid-wrapper focused-card">
+            <div class="polaroid-inner">
+                <div class="polaroid-front"></div>
+                <div class="polaroid-back"></div>
+            </div>
+        </div>
+        <p id="flip-hint" class="flip-hint">Tap the card to flip</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
